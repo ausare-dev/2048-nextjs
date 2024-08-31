@@ -7,6 +7,8 @@ import {
 	BoardType,
 	Direction,
 } from '../../utils/gameLogic';
+import Tile from '../Tile/Tile';
+import EmptyTile from '../EmptyTile/EmptyTile';
 interface BoardProps {
 	isClient: boolean;
 }
@@ -65,23 +67,13 @@ const Board: React.FC<BoardProps> = ({ isClient }) => {
 		<div>
 			{board.map((row, rowIndex) => (
 				<div key={rowIndex} style={{ display: 'flex' }}>
-					{row.map((tile, colIndex) => (
-						<div
-							key={colIndex}
-							style={{
-								width: '50px',
-								height: '50px',
-								backgroundColor: tile ? '#eee' : '#ccc',
-								lineHeight: '50px',
-								textAlign: 'center',
-								fontSize: '24px',
-								color: '#000',
-								margin: '1px',
-							}}
-						>
-							{tile}
-						</div>
-					))}
+					{row.map((tile, colIndex) => {
+						return tile ? (
+							<Tile key={colIndex} tile={tile}/>
+						) : (
+							<EmptyTile key={colIndex} />
+						);
+					})}
 				</div>
 			))}
 			{gameOver && <div>Game Over!</div>}
