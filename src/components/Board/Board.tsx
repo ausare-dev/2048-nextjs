@@ -69,9 +69,9 @@ const Board: React.FC<BoardProps> = ({ isClient }) => {
 				<div key={rowIndex} style={{ display: 'flex' }}>
 					{row.map((tile, colIndex) => {
 						return tile ? (
-							<Tile key={colIndex} tile={tile}/>
+							<Tile key={`${rowIndex}-${colIndex}`} tile={tile} />
 						) : (
-							<EmptyTile key={colIndex} />
+							<EmptyTile key={`${rowIndex}-${colIndex}`} />
 						);
 					})}
 				</div>
