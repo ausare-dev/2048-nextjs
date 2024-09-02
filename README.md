@@ -1,4 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 2048 NextJs
+
+<img src="demo.gif" width="100%" height="auto" />
+
+### Описание
+
+Игра 2048 на NextJs 
+
+### Особенности
+
+- Препроцессор Scss
 
 ## Getting Started
 
