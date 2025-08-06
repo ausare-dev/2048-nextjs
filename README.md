@@ -1,50 +1,92 @@
-# 2048 NextJs
+# 2048 Game - Next.js
 
-<img src="demo.gif" width="100%" height="auto" />
+Современная реализация классической игры 2048 на Next.js с TypeScript и анимациями.
 
-### Описание
+## 🎮 Особенности
 
-Игра 2048 на NextJs 
+- **Плавные анимации** - движение и слияние плиток с использованием Framer Motion
+- **Подсчет очков** - автоматический подсчет очков при слиянии плиток
+- **Лучший счет** - сохранение лучшего результата в localStorage
+- **Мобильная поддержка** - свайпы для управления на мобильных устройствах
+- **Современный UI** - красивый и отзывчивый интерфейс
+- **TypeScript** - полная типизация для надежности кода
 
-### Особенности
-
-- Препроцессор Scss
-
-## Getting Started
-
-First, run the development server:
+## 🚀 Установка и запуск
 
 ```bash
+# Установка зависимостей
+npm install
+
+# Запуск в режиме разработки
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Сборка для продакшена
+npm run build
+
+# Запуск продакшн версии
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎯 Управление
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **Клавиатура**: используйте стрелки для движения плиток
+- **Мобильные устройства**: свайпайте в нужном направлении
+- **Новая игра**: нажмите кнопку "New Game" для начала новой игры
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🎨 Технологии
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **Next.js 14** - React фреймворк
+- **TypeScript** - типизированный JavaScript
+- **Framer Motion** - библиотека анимаций
+- **SCSS** - препроцессор стилей
+- **ESLint** - линтер кода
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📱 Анимации
 
-## Learn More
+- **Появление новых плиток** - плавное масштабирование с 0 до 1
+- **Слияние плиток** - эффект увеличения при слиянии
+- **Движение плиток** - плавные переходы между позициями
+- **Hover эффекты** - интерактивность при наведении
 
-To learn more about Next.js, take a look at the following resources:
+## 🏆 Система очков
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Очки начисляются за каждое слияние плиток
+- Лучший результат сохраняется автоматически
+- Счетчик обновляется в реальном времени
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 📁 Структура проекта
 
-## Deploy on Vercel
+```
+src/
+├── components/          # React компоненты
+│   ├── Board/          # Основная игровая доска
+│   ├── Tile/           # Компонент плитки
+│   ├── EmptyTile/      # Пустая плитка
+│   ├── ScoreCounter/   # Счетчик очков
+│   ├── BestScore/      # Лучший счет
+│   └── NewGameButton/  # Кнопка новой игры
+├── utils/              # Утилиты
+│   ├── gameLogic.ts    # Игровая логика
+│   └── useSwipe.ts     # Хук для свайпов
+├── styles/             # Глобальные стили
+└── pages/              # Страницы Next.js
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎮 Игровая логика
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Инициализация**: 2 случайные плитки (2 или 4)
+- **Движение**: плитки скользят в выбранном направлении
+- **Слияние**: одинаковые плитки объединяются при соприкосновении
+- **Новые плитки**: после каждого хода появляется новая плитка (2 или 4)
+- **Конец игры**: когда нет возможных ходов
+
+## 🚀 Готово к продакшену
+
+- Оптимизированные изображения с Next.js Image
+- Адаптивный дизайн для всех устройств
+- SEO оптимизация
+- Быстрая загрузка
+
+## 📄 Лицензия
+
+MIT License
