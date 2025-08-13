@@ -17,6 +17,7 @@ import styles from './Board.module.scss';
 
 interface BoardProps {
 	isClient: boolean;
+	onScoreUpdate: (score: number) => void;
 }
 
 interface TilePosition {
@@ -30,11 +31,10 @@ interface TilePosition {
 	isNew: boolean;
 }
 
-const Board: React.FC<BoardProps> = ({ isClient }) => {
+const Board: React.FC<BoardProps> = ({ isClient, onScoreUpdate }) => {
 	const [board, setBoard] = useState<BoardStateType>(initializeBoard());
 	const [gameOver, setGameOver] = useState<boolean>(false);
 	const [score, setScore] = useState<number>(0);
-	const [bestScore, setBestScore] = useState<number>(0);
 	const [tilePositions, setTilePositions] = useState<TilePosition[]>([]);
 	const [isAnimating, setIsAnimating] = useState<boolean>(false);
 	const prevBoardRef = useRef<BoardStateType>(board);
@@ -120,12 +120,7 @@ const Board: React.FC<BoardProps> = ({ isClient }) => {
 
 					setScore(prevScore => {
 						const newScore = prevScore + moveScore;
-						if (newScore > bestScore) {
-							setBestScore(newScore);
-							if (typeof window !== 'undefined') {
-								localStorage.setItem('bestScore', newScore.toString());
-							}
-						}
+						onScoreUpdate(newScore);
 						return newScore;
 					});
 
@@ -140,20 +135,11 @@ const Board: React.FC<BoardProps> = ({ isClient }) => {
 				}, 300); // Время анимации
 			}
 		},
-		[gameOver, isAnimating, board, bestScore, createTilePositions]
+		[gameOver, isAnimating, board, createTilePositions]
 	);
 
 	// Поддержка свайпов для мобильных устройств
 	useSwipe(handleMove);
-
-	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			const savedBestScore = localStorage.getItem('bestScore');
-			if (savedBestScore) {
-				setBestScore(parseInt(savedBestScore));
-			}
-		}
-	}, []);
 
 	useEffect(() => {
 		// Инициализируем позиции плиток при первой загрузке
@@ -200,11 +186,6 @@ const Board: React.FC<BoardProps> = ({ isClient }) => {
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.title}>2048</div>
-				<div className={styles.scores}>
-					<ScoreCounter score={score} />
-					<BestScore bestScore={bestScore} />
-				</div>
-				<NewGameButton onNewGame={handleNewGame} />
 			</div>
 			<div className={styles.gameBoard}>
 				{/* Пустые ячейки как фон */}

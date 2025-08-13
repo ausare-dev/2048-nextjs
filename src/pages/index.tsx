@@ -1,15 +1,41 @@
-import Board from "@/components/Board/Board";
-import Head from "next/head";
-import {useState, useEffect} from 'react'
+import Board from '@/components/Board/Board';
+import RightPanel from '@/components/RightPanel/RightPanel';
+import Head from 'next/head';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  
+	const [isClient, setIsClient] = useState(false);
+	const [score, setScore] = useState(0);
+	const [bestScore, setBestScore] = useState(0);
 
-  return (
+	useEffect(() => {
+		setIsClient(true);
+		// Загружаем лучший счет из localStorage
+		if (typeof window !== 'undefined') {
+			const savedBestScore = localStorage.getItem('bestScore');
+			if (savedBestScore) {
+				setBestScore(parseInt(savedBestScore));
+			}
+		}
+	}, []);
+
+	const handleNewGame = () => {
+		setScore(0);
+		// Перезагружаем страницу для новой игры
+		window.location.reload();
+	};
+
+	const handleScoreUpdate = (newScore: number) => {
+		setScore(newScore);
+		if (newScore > bestScore) {
+			setBestScore(newScore);
+			if (typeof window !== 'undefined') {
+				localStorage.setItem('bestScore', newScore.toString());
+			}
+		}
+	};
+
+	return (
 		<>
 			<Head>
 				<title>2048 NextJs</title>
@@ -18,7 +44,12 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<main>
-				<Board isClient={isClient} />
+				<Board isClient={isClient} onScoreUpdate={handleScoreUpdate} />
+				<RightPanel
+					score={score}
+					bestScore={bestScore}
+					onNewGame={handleNewGame}
+				/>
 			</main>
 		</>
 	);

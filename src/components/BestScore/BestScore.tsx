@@ -8,7 +8,7 @@ interface BestScoreProps {
 const BestScore: React.FC<BestScoreProps> = ({ bestScore }) => {
 	return (
 		<div className={styles.bestScore}>
-			<div className={styles.label}>Best</div>
+			<div className={styles.label}>Best Score</div>
 			<div className={styles.value}>{bestScore}</div>
 		</div>
 	);
