@@ -2,7 +2,7 @@ import Board from '@/components/Board/Board';
 import RightPanel from '@/components/RightPanel/RightPanel';
 import ThemeSelector from '@/components/ThemeSelector/ThemeSelector';
 import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import { useThemeStyles } from '@/hooks/useThemeStyles';
 
@@ -25,11 +25,46 @@ export default function Home() {
 	}, []);
 
 	useEffect(() => {
-		// Применяем стили темы к body
+		// Применяем стили темы через CSS variables
 		if (typeof document !== 'undefined') {
-			document.body.style.background = themeStyles.colors.background;
+			const root = document.documentElement;
+			root.style.setProperty('--app-bg', themeStyles.colors.background);
+			root.style.setProperty('--title-color', themeStyles.colors.title);
+			root.style.setProperty('--board-bg', themeStyles.colors.board);
+			root.style.setProperty('--board-border', themeStyles.colors.boardBorder);
+			root.style.setProperty('--empty-tile-bg', themeStyles.colors.emptyTile);
+			root.style.setProperty(
+				'--empty-tile-border',
+				themeStyles.colors.emptyTileBorder
+			);
+			root.style.setProperty(
+				'--score-counter-bg',
+				themeStyles.colors.scoreCounter
+			);
+			root.style.setProperty(
+				'--score-counter-border',
+				themeStyles.colors.scoreCounterBorder
+			);
+			root.style.setProperty('--best-score-bg', themeStyles.colors.bestScore);
+			root.style.setProperty(
+				'--best-score-border',
+				themeStyles.colors.bestScoreBorder
+			);
+			root.style.setProperty(
+				'--new-game-button-bg',
+				themeStyles.colors.newGameButton
+			);
+			root.style.setProperty(
+				'--new-game-button-border',
+				themeStyles.colors.newGameButtonBorder
+			);
+			root.style.setProperty(
+				'--game-over-bg',
+				`${themeStyles.colors.background}dd`
+			);
+			root.style.setProperty('--game-over-text', themeStyles.colors.title);
 		}
-	}, [themeStyles.colors.background]);
+	}, [themeStyles]);
 
 	const handleNewGame = () => {
 		setScore(0);
@@ -37,15 +72,18 @@ export default function Home() {
 		window.location.reload();
 	};
 
-	const handleScoreUpdate = (newScore: number) => {
-		setScore(newScore);
-		if (newScore > bestScore) {
-			setBestScore(newScore);
-			if (typeof window !== 'undefined') {
-				localStorage.setItem('bestScore', newScore.toString());
+	const handleScoreUpdate = useCallback(
+		(newScore: number) => {
+			setScore(newScore);
+			if (newScore > bestScore) {
+				setBestScore(newScore);
+				if (typeof window !== 'undefined') {
+					localStorage.setItem('bestScore', newScore.toString());
+				}
 			}
-		}
-	};
+		},
+		[bestScore]
+	);
 
 	return (
 		<>

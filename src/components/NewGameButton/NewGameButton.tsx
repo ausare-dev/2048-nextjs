@@ -3,12 +3,11 @@ import styles from './NewGameButton.module.scss';
 
 interface NewGameButtonProps {
 	onNewGame: () => void;
-	style?: React.CSSProperties;
 }
 
-const NewGameButton: React.FC<NewGameButtonProps> = ({ onNewGame, style }) => {
+const NewGameButton: React.FC<NewGameButtonProps> = ({ onNewGame }) => {
 	return (
-		<button className={styles.newGameButton} onClick={onNewGame} style={style}>
+		<button className={styles.newGameButton} onClick={onNewGame}>
 			New Game
 		</button>
 	);

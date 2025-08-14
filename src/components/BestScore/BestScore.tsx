@@ -3,12 +3,11 @@ import styles from './BestScore.module.scss';
 
 interface BestScoreProps {
 	bestScore: number;
-	style?: React.CSSProperties;
 }
 
-const BestScore: React.FC<BestScoreProps> = ({ bestScore, style }) => {
+const BestScore: React.FC<BestScoreProps> = ({ bestScore }) => {
 	return (
-		<div className={styles.bestScore} style={style}>
+		<div className={styles.bestScore}>
 			<div className={styles.label}>Best Score</div>
 			<div className={styles.value}>{bestScore}</div>
 		</div>

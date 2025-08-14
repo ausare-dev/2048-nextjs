@@ -16,9 +16,54 @@
 
 @media (max-width: 768px) {
 	.rightPanel {
-		position: fixed;
-		top: 10px;
-		right: 10px;
-		gap: 15px;
+		position: static;
+		top: auto;
+		right: auto;
+		gap: 12px;
+		align-items: center;
+		margin-top: 20px;
+	}
+
+	.scores {
+		flex-direction: row;
+		gap: 10px;
+	}
+}
+
+@media (max-width: 480px) {
+	.rightPanel {
+		gap: 10px;
+		margin-top: 15px;
+	}
+
+	.scores {
+		gap: 8px;
+	}
+}
+
+@media (max-width: 360px) {
+	.rightPanel {
+		gap: 8px;
+		margin-top: 10px;
+	}
+
+	.scores {
+		gap: 6px;
+	}
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+	.rightPanel {
+		position: static;
+		top: auto;
+		right: auto;
+		gap: 8px;
+		align-items: center;
+		margin-top: 10px;
+	}
+
+	.scores {
+		flex-direction: row;
+		gap: 6px;
 	}
 }

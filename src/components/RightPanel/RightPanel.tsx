@@ -3,8 +3,6 @@ import ScoreCounter from '../ScoreCounter/ScoreCounter';
 import BestScore from '../BestScore/BestScore';
 import NewGameButton from '../NewGameButton/NewGameButton';
 import styles from './RightPanel.module.scss';
-import { Theme } from '../ThemeSelector/ThemeSelector';
-import { useThemeStyles } from '../../hooks/useThemeStyles';
 
 interface RightPanelProps {
 	score: number;
@@ -19,32 +17,13 @@ const RightPanel: React.FC<RightPanelProps> = ({
 	onNewGame,
 	currentTheme,
 }) => {
-	const themeStyles = useThemeStyles(currentTheme);
 	return (
 		<div className={styles.rightPanel}>
 			<div className={styles.scores}>
-				<ScoreCounter
-					score={score}
-					style={{
-						background: themeStyles.colors.scoreCounter,
-						borderColor: themeStyles.colors.scoreCounterBorder,
-					}}
-				/>
-				<BestScore
-					bestScore={bestScore}
-					style={{
-						background: themeStyles.colors.bestScore,
-						borderColor: themeStyles.colors.bestScoreBorder,
-					}}
-				/>
+				<ScoreCounter score={score} />
+				<BestScore bestScore={bestScore} />
 			</div>
-			<NewGameButton
-				onNewGame={onNewGame}
-				style={{
-					background: themeStyles.colors.newGameButton,
-					borderColor: themeStyles.colors.newGameButtonBorder,
-				}}
-			/>
+			<NewGameButton onNewGame={onNewGame} />
 		</div>
 	);
 };

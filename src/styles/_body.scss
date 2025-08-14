@@ -1,14 +1,29 @@
 body {
 	display: flex;
 	height: 100vh;
-	background-color: #57407c;
+	background-color: var(--app-bg);
 	flex-direction: column;
 	justify-content: center;
 	align-content: center;
 	align-items: center;
 	font-family: 'Clear Sans', sans-serif;
 	font-size: 21px;
+	overflow-x: hidden;
 }
+
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	width: 100%;
+	max-width: var(--max-content-width);
+	margin: 0 auto;
+	padding: 20px;
+	position: relative;
+}
+
 a {
 	text-decoration: none;
 }

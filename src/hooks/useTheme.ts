@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Theme } from '../components/ThemeSelector/ThemeSelector';
 
 export const useTheme = () => {
 	const [currentTheme, setCurrentTheme] = useState<string>('gif');

@@ -45,13 +45,17 @@ const Tile: React.FC<TileProps> = ({
 			prevRowIndex !== undefined &&
 			prevColIndex !== undefined
 		) {
-			// Устанавливаем начальную позицию (откуда движется плитка)
-			const startTop = prevRowIndex * 120;
-			const startLeft = prevColIndex * 120;
+			const rootStyles = getComputedStyle(
+				tileRef.current.parentElement as Element
+			);
+			const stepStr = rootStyles.getPropertyValue('--step').trim();
+			const step = stepStr ? parseFloat(stepStr) : 120;
 
-			// Конечная позиция (куда движется плитка)
-			const endTop = rowIndex * 120;
-			const endLeft = colIndex * 120;
+			const startTop = prevRowIndex * step;
+			const startLeft = prevColIndex * step;
+
+			const endTop = rowIndex * step;
+			const endLeft = colIndex * step;
 
 			// Устанавливаем начальную позицию без анимации
 			tileRef.current.style.transition = 'none';
@@ -69,9 +73,13 @@ const Tile: React.FC<TileProps> = ({
 
 			setCurrentPosition({ top: endTop, left: endLeft });
 		} else {
-			// Устанавливаем позицию без анимации
-			const newTop = rowIndex * 120;
-			const newLeft = colIndex * 120;
+			const rootStyles = tileRef.current
+				? getComputedStyle(tileRef.current.parentElement as Element)
+				: undefined;
+			const stepStr = rootStyles?.getPropertyValue('--step').trim();
+			const step = stepStr ? parseFloat(stepStr) : 120;
+			const newTop = rowIndex * step;
+			const newLeft = colIndex * step;
 			setCurrentPosition({ top: newTop, left: newLeft });
 		}
 	}, [isAnimating, rowIndex, colIndex, prevRowIndex, prevColIndex]);

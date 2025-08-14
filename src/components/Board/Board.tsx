@@ -15,7 +15,6 @@ import ScoreCounter from '../ScoreCounter/ScoreCounter';
 import BestScore from '../BestScore/BestScore';
 import NewGameButton from '../NewGameButton/NewGameButton';
 import styles from './Board.module.scss';
-import { Theme } from '../ThemeSelector/ThemeSelector';
 import { useThemeStyles } from '../../hooks/useThemeStyles';
 
 interface BoardProps {
@@ -129,7 +128,6 @@ const Board: React.FC<BoardProps> = ({
 
 					setScore(prevScore => {
 						const newScore = prevScore + moveScore;
-						onScoreUpdate(newScore);
 						return newScore;
 					});
 
@@ -155,6 +153,11 @@ const Board: React.FC<BoardProps> = ({
 		setTilePositions(createTilePositions(board));
 		prevBoardRef.current = board;
 	}, []);
+
+	// Отслеживаем изменения счета и уведомляем родительский компонент
+	useEffect(() => {
+		onScoreUpdate(score);
+	}, [score, onScoreUpdate]);
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {

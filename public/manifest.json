@@ -1,0 +1,20 @@
+{
+	"name": "2048 Game",
+	"short_name": "2048",
+	"description": "A modern 2048 game built with Next.js",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#57407c",
+	"theme_color": "#57407c",
+	"orientation": "portrait-primary",
+	"icons": [
+		{
+			"src": "/favicon.ico",
+			"sizes": "48x48",
+			"type": "image/x-icon"
+		}
+	],
+	"categories": ["games", "entertainment"],
+	"lang": "en",
+	"dir": "ltr"
+}
