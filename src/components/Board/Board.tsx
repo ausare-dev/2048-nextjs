@@ -9,15 +9,19 @@ import {
 } from '../../utils/gameLogic';
 import { useSwipe } from '../../utils/useSwipe';
 import Tile from '../Tile/Tile';
+import ColoredTile from '../ColoredTile/ColoredTile';
 import EmptyTile from '../EmptyTile/EmptyTile';
 import ScoreCounter from '../ScoreCounter/ScoreCounter';
 import BestScore from '../BestScore/BestScore';
 import NewGameButton from '../NewGameButton/NewGameButton';
 import styles from './Board.module.scss';
+import { Theme } from '../ThemeSelector/ThemeSelector';
+import { useThemeStyles } from '../../hooks/useThemeStyles';
 
 interface BoardProps {
 	isClient: boolean;
 	onScoreUpdate: (score: number) => void;
+	currentTheme: string;
 }
 
 interface TilePosition {
@@ -31,10 +35,15 @@ interface TilePosition {
 	isNew: boolean;
 }
 
-const Board: React.FC<BoardProps> = ({ isClient, onScoreUpdate }) => {
+const Board: React.FC<BoardProps> = ({
+	isClient,
+	onScoreUpdate,
+	currentTheme,
+}) => {
 	const [board, setBoard] = useState<BoardStateType>(initializeBoard());
 	const [gameOver, setGameOver] = useState<boolean>(false);
 	const [score, setScore] = useState<number>(0);
+	const themeStyles = useThemeStyles(currentTheme);
 	const [tilePositions, setTilePositions] = useState<TilePosition[]>([]);
 	const [isAnimating, setIsAnimating] = useState<boolean>(false);
 	const prevBoardRef = useRef<BoardStateType>(board);
@@ -183,7 +192,16 @@ const Board: React.FC<BoardProps> = ({ isClient, onScoreUpdate }) => {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			style={
+				{
+					'--title-color': themeStyles.colors.title,
+					'--empty-tile-bg': themeStyles.colors.emptyTile,
+					'--empty-tile-border': themeStyles.colors.emptyTileBorder,
+				} as React.CSSProperties
+			}
+		>
 			<div className={styles.header}>
 				<div className={styles.title}>2048</div>
 			</div>
@@ -193,20 +211,36 @@ const Board: React.FC<BoardProps> = ({ isClient, onScoreUpdate }) => {
 					<EmptyTile key={`empty-${index}`} />
 				))}
 				{/* Плитки с анимациями */}
-				{tilePositions.map(tilePos => (
-					<Tile
-						key={tilePos.id}
-						tile={tilePos.value}
-						rowIndex={tilePos.row}
-						colIndex={tilePos.col}
-						prevRowIndex={tilePos.prevRow}
-						prevColIndex={tilePos.prevCol}
-						merged={tilePos.merged}
-						isNew={tilePos.isNew}
-						tileId={tilePos.id}
-						isAnimating={isAnimating}
-					/>
-				))}
+				{tilePositions.map(tilePos =>
+					currentTheme === 'gif' ? (
+						<Tile
+							key={tilePos.id}
+							tile={tilePos.value}
+							rowIndex={tilePos.row}
+							colIndex={tilePos.col}
+							prevRowIndex={tilePos.prevRow}
+							prevColIndex={tilePos.prevCol}
+							merged={tilePos.merged}
+							isNew={tilePos.isNew}
+							tileId={tilePos.id}
+							isAnimating={isAnimating}
+						/>
+					) : (
+						<ColoredTile
+							key={tilePos.id}
+							tile={tilePos.value}
+							rowIndex={tilePos.row}
+							colIndex={tilePos.col}
+							prevRowIndex={tilePos.prevRow}
+							prevColIndex={tilePos.prevCol}
+							merged={tilePos.merged}
+							isNew={tilePos.isNew}
+							tileId={tilePos.id}
+							isAnimating={isAnimating}
+							theme={currentTheme}
+						/>
+					)
+				)}
 			</div>
 			{gameOver && (
 				<div className={styles.gameOver}>

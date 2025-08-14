@@ -12,7 +12,8 @@
 	vertical-align: middle;
 	border-radius: 7px;
 	font-family: 'Clear Sans';
-	background-color: #3d2963;
+	background: var(--empty-tile-bg, #3d2963);
+	border: none;
 	position: absolute;
 }
 

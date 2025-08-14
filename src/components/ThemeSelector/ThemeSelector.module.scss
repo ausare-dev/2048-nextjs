@@ -1,0 +1,71 @@
+.themeSelector {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	z-index: 1000;
+	background: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(10px);
+	border-radius: 12px;
+	padding: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 600;
+	color: white;
+	text-align: center;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.themes {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.themeButton {
+	padding: 10px 15px;
+	border: 2px solid;
+	border-radius: 8px;
+	color: white;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	font-family: 'Clear Sans', Arial, sans-serif;
+	min-width: 120px;
+}
+
+.themeButton:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.themeButton.active {
+	transform: scale(1.05);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 768px) {
+	.themeSelector {
+		position: fixed;
+		top: 10px;
+		left: 10px;
+		padding: 15px;
+		gap: 10px;
+	}
+
+	.themeButton {
+		padding: 8px 12px;
+		font-size: 12px;
+		min-width: 100px;
+	}
+}

@@ -1,12 +1,17 @@
 import Board from '@/components/Board/Board';
 import RightPanel from '@/components/RightPanel/RightPanel';
+import ThemeSelector from '@/components/ThemeSelector/ThemeSelector';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import { useTheme } from '@/hooks/useTheme';
+import { useThemeStyles } from '@/hooks/useThemeStyles';
 
 export default function Home() {
 	const [isClient, setIsClient] = useState(false);
 	const [score, setScore] = useState(0);
 	const [bestScore, setBestScore] = useState(0);
+	const { currentTheme, changeTheme } = useTheme();
+	const themeStyles = useThemeStyles(currentTheme);
 
 	useEffect(() => {
 		setIsClient(true);
@@ -18,6 +23,13 @@ export default function Home() {
 			}
 		}
 	}, []);
+
+	useEffect(() => {
+		// Применяем стили темы к body
+		if (typeof document !== 'undefined') {
+			document.body.style.background = themeStyles.colors.background;
+		}
+	}, [themeStyles.colors.background]);
 
 	const handleNewGame = () => {
 		setScore(0);
@@ -44,11 +56,20 @@ export default function Home() {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<main>
-				<Board isClient={isClient} onScoreUpdate={handleScoreUpdate} />
+				<Board
+					isClient={isClient}
+					onScoreUpdate={handleScoreUpdate}
+					currentTheme={currentTheme}
+				/>
 				<RightPanel
 					score={score}
 					bestScore={bestScore}
 					onNewGame={handleNewGame}
+					currentTheme={currentTheme}
+				/>
+				<ThemeSelector
+					currentTheme={currentTheme}
+					onThemeChange={changeTheme}
 				/>
 			</main>
 		</>

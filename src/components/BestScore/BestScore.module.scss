@@ -1,18 +1,17 @@
 .bestScore {
-	background: linear-gradient(135deg, #38b3a5 0%, #35a598 100%);
 	border-radius: 8px;
 	padding: 15px 20px;
 	color: white;
 	text-align: center;
 	min-width: 120px;
-	box-shadow: 0 4px 8px rgba(49, 130, 206, 0.3);
-	border: 2px solid #8bd0c8;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	border: 2px solid;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .bestScore:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 6px 12px rgba(49, 206, 177, 0.4);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .label {

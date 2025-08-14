@@ -1,18 +1,17 @@
 .scoreCounter {
-	background: linear-gradient(135deg, #50387d 0%, #3d2963 100%);
 	border-radius: 8px;
 	padding: 15px 20px;
 	color: white;
 	text-align: center;
 	min-width: 120px;
-	box-shadow: 0 4px 8px rgba(107, 70, 193, 0.3);
-	border: 2px solid rgb(183, 157, 235);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	border: 2px solid;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .scoreCounter:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 6px 12px rgba(107, 70, 193, 0.4);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .label {

@@ -17,7 +17,7 @@
 .title {
 	font-size: 48px;
 	font-weight: bold;
-	color: white;
+	color: var(--title-color, white);
 	font-family: 'Clear Sans';
 }
 
@@ -32,6 +32,7 @@
 	position: relative;
 	width: 460px;
 	height: 460px;
+	background: transparent;
 }
 
 @media (max-width: 600px) {

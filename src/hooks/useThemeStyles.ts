@@ -1,0 +1,85 @@
+import { useMemo } from 'react';
+import { Theme } from '../components/ThemeSelector/ThemeSelector';
+
+export const useThemeStyles = (currentTheme: string) => {
+	const themeStyles = useMemo(() => {
+		const themes: { [key: string]: Theme } = {
+			gif: {
+				id: 'gif',
+				name: 'GIF Theme',
+				colors: {
+					background: '#57407c',
+					board: 'transparent',
+					boardBorder: '#6b46c1',
+					emptyTile: '#3d2963',
+					emptyTileBorder: 'transparent',
+					title: '#ffffff',
+					scoreCounter: 'linear-gradient(135deg, #6b46c1 0%, #805ad5 100%)',
+					scoreCounterBorder: '#9f7aea',
+					bestScore: 'linear-gradient(135deg, #3182ce 0%, #4299e1 100%)',
+					bestScoreBorder: '#63b3ed',
+					newGameButton: 'linear-gradient(135deg, #6b46c1 0%, #805ad5 100%)',
+					newGameButtonBorder: '#9f7aea',
+				},
+			},
+			neon: {
+				id: 'neon',
+				name: 'Neon Theme',
+				colors: {
+					background: '#0f0f23',
+					board: '#1a1a2e',
+					boardBorder: '#00d4ff',
+					emptyTile: '#10183e',
+					emptyTileBorder: '#00d4ff',
+					title: '#00d4ff',
+					scoreCounter: '#ff006e',
+					scoreCounterBorder: '#ff006e',
+					bestScore: '#0099cc',
+					bestScoreBorder: '#00d4ff',
+					newGameButton: '#ff006e',
+					newGameButtonBorder: '#ff006e',
+				},
+			},
+			sunset: {
+				id: 'sunset',
+				name: 'Sunset Theme',
+				colors: {
+					background: '#ff9f43',
+					board: '#feca57',
+					boardBorder: '#ff6b6b',
+					emptyTile: '#b470ab',
+					emptyTileBorder: '#ff6b6b',
+					title: '#ffffff',
+					scoreCounter: '#ee5a24',
+					scoreCounterBorder: '#ff6b6b',
+					bestScore: '#feca57',
+					bestScoreBorder: '#feca57',
+					newGameButton: '#ee5a24',
+					newGameButtonBorder: '#ff6b6b',
+				},
+			},
+			forest: {
+				id: 'forest',
+				name: 'Forest Theme',
+				colors: {
+					background: '#2d5016',
+					board: '#4a7c59',
+					boardBorder: '#2d5016',
+					emptyTile: '#496119',
+					emptyTileBorder: '#2d5016',
+					title: '#ffffff',
+					scoreCounter: '#4a7c59',
+					scoreCounterBorder: '#2d5016',
+					bestScore: '#90ee90',
+					bestScoreBorder: '#8fbc8f',
+					newGameButton: '#4a7c59',
+					newGameButtonBorder: '#2d5016',
+				},
+			},
+		};
+
+		return themes[currentTheme] || themes.gif;
+	}, [currentTheme]);
+
+	return themeStyles;
+};

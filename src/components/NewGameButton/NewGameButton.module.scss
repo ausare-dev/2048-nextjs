@@ -1,6 +1,5 @@
 .newGameButton {
-	background: linear-gradient(135deg, #62429c 0%, #3d2963 100%);
-	border: 2px solid rgb(183, 157, 235);
+	border: 2px solid;
 	border-radius: 8px;
 	color: white;
 	font-size: 16px;
@@ -9,15 +8,14 @@
 	cursor: pointer;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
-	box-shadow: 0 4px 8px rgba(107, 70, 193, 0.3);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 	transition: all 0.2s ease;
 	font-family: 'Clear Sans', Arial, sans-serif;
 }
 
 .newGameButton:hover {
-	background: linear-gradient(135deg, #754fbb 0%, #56398b 100%);
 	transform: translateY(-2px);
-	box-shadow: 0 6px 12px rgba(107, 70, 193, 0.4);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .newGameButton:active {
