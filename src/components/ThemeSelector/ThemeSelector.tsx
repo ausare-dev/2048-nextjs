@@ -106,6 +106,24 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({
 				newGameButtonBorder: '#2d5016',
 			},
 		},
+		{
+			id: 'classic',
+			name: 'Classic',
+			colors: {
+				background: '#faf8ef',
+				board: '#bbada0',
+				boardBorder: '#bbada0',
+				emptyTile: '#cdc1b4',
+				emptyTileBorder: '#bbada0',
+				title: '#776e65',
+				scoreCounter: '#bbada0',
+				scoreCounterBorder: '#bbada0',
+				bestScore: '#bbada0',
+				bestScoreBorder: '#bbada0',
+				newGameButton: '#8f7a66',
+				newGameButtonBorder: '#8f7a66',
+			},
+		},
 	];
 
 	return (
