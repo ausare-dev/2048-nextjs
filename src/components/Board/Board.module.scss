@@ -3,7 +3,6 @@
 	flex-direction: column;
 	align-items: center;
 	gap: 20px;
-	padding: 20px;
 }
 
 .header {
@@ -28,7 +27,6 @@
 
 .gameBoard {
 	border-radius: 8px;
-	padding: 10px;
 	position: relative;
 	width: 460px;
 	height: 460px;
@@ -37,8 +35,8 @@
 
 @media (max-width: 600px) {
 	.gameBoard {
-		width: 340px;
-		height: 340px;
+		width: 300px;
+		height: 300px;
 	}
 }
 

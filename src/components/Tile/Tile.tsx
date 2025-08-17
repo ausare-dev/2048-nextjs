@@ -38,6 +38,21 @@ const Tile: React.FC<TileProps> = ({
 		return `/images/${value}.gif`;
 	};
 
+	const updatePosition = () => {
+		if (!tileRef.current) return;
+
+		const rootStyles = getComputedStyle(
+			tileRef.current.parentElement as Element
+		);
+		const stepStr = rootStyles.getPropertyValue('--step').trim();
+		const step = stepStr ? parseFloat(stepStr) : 120;
+
+		const newTop = rowIndex * step;
+		const newLeft = colIndex * step;
+
+		return { top: newTop, left: newLeft, step };
+	};
+
 	useEffect(() => {
 		if (
 			isAnimating &&
@@ -45,15 +60,12 @@ const Tile: React.FC<TileProps> = ({
 			prevRowIndex !== undefined &&
 			prevColIndex !== undefined
 		) {
-			const rootStyles = getComputedStyle(
-				tileRef.current.parentElement as Element
-			);
-			const stepStr = rootStyles.getPropertyValue('--step').trim();
-			const step = stepStr ? parseFloat(stepStr) : 120;
+			const position = updatePosition();
+			if (!position) return;
 
+			const { step } = position;
 			const startTop = prevRowIndex * step;
 			const startLeft = prevColIndex * step;
-
 			const endTop = rowIndex * step;
 			const endLeft = colIndex * step;
 
@@ -73,16 +85,30 @@ const Tile: React.FC<TileProps> = ({
 
 			setCurrentPosition({ top: endTop, left: endLeft });
 		} else {
-			const rootStyles = tileRef.current
-				? getComputedStyle(tileRef.current.parentElement as Element)
-				: undefined;
-			const stepStr = rootStyles?.getPropertyValue('--step').trim();
-			const step = stepStr ? parseFloat(stepStr) : 120;
-			const newTop = rowIndex * step;
-			const newLeft = colIndex * step;
-			setCurrentPosition({ top: newTop, left: newLeft });
+			const position = updatePosition();
+			if (position) {
+				setCurrentPosition({ top: position.top, left: position.left });
+			}
 		}
 	}, [isAnimating, rowIndex, colIndex, prevRowIndex, prevColIndex]);
+
+	// Отслеживание изменения размера родительского элемента
+	useEffect(() => {
+		if (!tileRef.current || !tileRef.current.parentElement) return;
+
+		const resizeObserver = new ResizeObserver(() => {
+			const position = updatePosition();
+			if (position) {
+				setCurrentPosition({ top: position.top, left: position.left });
+			}
+		});
+
+		resizeObserver.observe(tileRef.current.parentElement);
+
+		return () => {
+			resizeObserver.disconnect();
+		};
+	}, [rowIndex, colIndex]);
 
 	if (!tile) return null;
 

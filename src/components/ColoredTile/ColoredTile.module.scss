@@ -13,6 +13,13 @@
 	transition: all 0.15s ease;
 }
 
+@media (max-width: 600px) {
+	.tile {
+		width: 60px;
+		height: 60px;
+	}
+}
+
 .value {
 	text-align: center;
 	line-height: 1;

@@ -9,3 +9,12 @@ body {
 	padding: 0;
 	font-family: 'Clear Sans', Arial, sans-serif;
 }
+:root {
+  --step: 120;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --step: 80;
+  }
+}

@@ -11,8 +11,6 @@ import { useSwipe } from '../../utils/useSwipe';
 import Tile from '../Tile/Tile';
 import ColoredTile from '../ColoredTile/ColoredTile';
 import EmptyTile from '../EmptyTile/EmptyTile';
-import ScoreCounter from '../ScoreCounter/ScoreCounter';
-import BestScore from '../BestScore/BestScore';
 import NewGameButton from '../NewGameButton/NewGameButton';
 import styles from './Board.module.scss';
 import { useThemeStyles } from '../../hooks/useThemeStyles';
