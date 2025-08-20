@@ -15,7 +15,6 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({
 
 	return (
 		<div className={styles.themeSelector}>
-			<div className={styles.title}>Theme</div>
 			<div className={styles.themes}>
 				{themes.map(theme => (
 					<button

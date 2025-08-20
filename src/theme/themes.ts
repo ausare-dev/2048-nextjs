@@ -21,7 +21,7 @@ export interface Theme {
 export const themesMap: { [key: string]: Theme } = {
 	gif: {
 		id: 'gif',
-		name: 'GIF Theme',
+		name: 'Base',
 		colors: {
 			background: '#57407c',
 			board: 'transparent',
@@ -39,7 +39,7 @@ export const themesMap: { [key: string]: Theme } = {
 	},
 	neon: {
 		id: 'neon',
-		name: 'Neon Theme',
+		name: 'Neon',
 		colors: {
 			background: '#0f0f23',
 			board: '#1a1a2e',
@@ -57,7 +57,7 @@ export const themesMap: { [key: string]: Theme } = {
 	},
 	sunset: {
 		id: 'sunset',
-		name: 'Sunset Theme',
+		name: 'Sunset',
 		colors: {
 			background: '#ff9f43',
 			board: '#feca57',
@@ -75,7 +75,7 @@ export const themesMap: { [key: string]: Theme } = {
 	},
 	forest: {
 		id: 'forest',
-		name: 'Forest Theme',
+		name: 'Forest',
 		colors: {
 			background: '#2d5016',
 			board: '#4a7c59',
