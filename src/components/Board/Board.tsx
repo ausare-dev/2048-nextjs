@@ -17,7 +17,7 @@ import { useThemeStyles } from '../../hooks/useThemeStyles';
 
 interface BoardProps {
 	isClient: boolean;
-	onScoreUpdate: (score: number) => void;
+	onScoreUpdate: (score: number, board?: BoardStateType) => void;
 	currentTheme: string;
 }
 
@@ -44,6 +44,7 @@ const Board: React.FC<BoardProps> = ({
 	const [tilePositions, setTilePositions] = useState<TilePosition[]>([]);
 	const [isAnimating, setIsAnimating] = useState<boolean>(false);
 	const prevBoardRef = useRef<BoardStateType>(board);
+	// убираем локальную тему, используем только currentTheme
 
 	// Функция для создания массива позиций плиток
 	const createTilePositions = useCallback(
@@ -110,6 +111,29 @@ const Board: React.FC<BoardProps> = ({
 			if (moved) {
 				setIsAnimating(true);
 
+				// Проверяем есть ли на поле значение >= 2048 и тема gif
+				if (currentTheme === 'gif') {
+					let hasBigTile = false;
+					for (let row = 0; row < 4; row++) {
+						for (let col = 0; col < 4; col++) {
+							const value = newBoard[row][col].value;
+							if (value !== null && value >= 2048) {
+								hasBigTile = true;
+								break;
+							}
+
+						}
+						if (hasBigTile) break;
+					}
+					if (hasBigTile) {
+						// глобально меняем тему через changeTheme
+						if (typeof window !== 'undefined') {
+							localStorage.setItem('gameTheme', 'classic');
+						}
+						window.dispatchEvent(new Event('storage'));
+					}
+				}
+
 				// Создаем позиции для анимации
 				const newPositions = createTilePositions(
 					newBoard,
@@ -140,7 +164,7 @@ const Board: React.FC<BoardProps> = ({
 				}, 300); // Время анимации
 			}
 		},
-		[gameOver, isAnimating, board, createTilePositions]
+		[gameOver, isAnimating, board, createTilePositions, currentTheme]
 	);
 
 	// Поддержка свайпов для мобильных устройств
@@ -150,12 +174,12 @@ const Board: React.FC<BoardProps> = ({
 		// Инициализируем позиции плиток при первой загрузке
 		setTilePositions(createTilePositions(board));
 		prevBoardRef.current = board;
-	}, []);
+	}, [board, createTilePositions]);
 
 	// Отслеживаем изменения счета и уведомляем родительский компонент
 	useEffect(() => {
-		onScoreUpdate(score);
-	}, [score, onScoreUpdate]);
+		onScoreUpdate(score, board);
+	}, [score, onScoreUpdate, board]);
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {

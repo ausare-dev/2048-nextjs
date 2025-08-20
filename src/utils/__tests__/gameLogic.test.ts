@@ -348,6 +348,396 @@ describe('gameLogic', () => {
 			expect(result.moved).toBe(false);
 			expect(result.score).toBe(0);
 		});
+
+		it('should merge two 1024 tiles into 2048', () => {
+			const board: BoardStateType = [
+				[
+					{
+						value: 1024,
+						merged: false,
+						isNew: false,
+						id: 'a',
+						direction: undefined,
+					},
+					{
+						value: 1024,
+						merged: false,
+						isNew: false,
+						id: 'b',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+			];
+			const result = move(board, 'left');
+			expect(result.moved).toBe(true);
+			expect(result.score).toBe(2048);
+			expect(board[0][0].value).toBe(2048);
+			expect(board[0][0].merged).toBe(true);
+		});
+
+		it('should merge two 2048 tiles into 4096', () => {
+			const board: BoardStateType = [
+				[
+					{
+						value: 2048,
+						merged: false,
+						isNew: false,
+						id: 'a',
+						direction: undefined,
+					},
+					{
+						value: 2048,
+						merged: false,
+						isNew: false,
+						id: 'b',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+			];
+			const result = move(board, 'left');
+			expect(result.moved).toBe(true);
+			expect(result.score).toBe(4096);
+			expect(board[0][0].value).toBe(4096);
+			expect(board[0][0].merged).toBe(true);
+		});
+
+		it('should merge two 4096 tiles into 8192', () => {
+			const board: BoardStateType = [
+				[
+					{
+						value: 4096,
+						merged: false,
+						isNew: false,
+						id: 'a',
+						direction: undefined,
+					},
+					{
+						value: 4096,
+						merged: false,
+						isNew: false,
+						id: 'b',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+				[
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+					{
+						value: null,
+						merged: false,
+						isNew: false,
+						id: '',
+						direction: undefined,
+					},
+				],
+			];
+			const result = move(board, 'left');
+			expect(result.moved).toBe(true);
+			expect(result.score).toBe(8192);
+			expect(board[0][0].value).toBe(8192);
+			expect(board[0][0].merged).toBe(true);
+		});
 	});
 
 	describe('isGameOver', () => {

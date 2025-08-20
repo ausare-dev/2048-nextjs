@@ -15,7 +15,24 @@ interface ColoredTileProps {
 }
 
 // Define the valid tile values as a type
-type TileValue = 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048;
+type TileValue =
+	| 2
+	| 4
+	| 8
+	| 16
+	| 32
+	| 64
+	| 128
+	| 256
+	| 512
+	| 1024
+	| 2048
+	| 4096
+	| 8192
+	| 16384
+	| 32768
+	| 65536
+	| 131072;
 
 // Define color mapping type
 type ColorMap = Record<TileValue, string>;
@@ -52,6 +69,12 @@ const ColoredTile: React.FC<ColoredTileProps> = ({
 				512: '#ff6b6b',
 				1024: '#ff006e',
 				2048: '#00d4ff',
+				4096: '#00ffea',
+				8192: '#00ffb3',
+				16384: '#00ff7f',
+				32768: '#00ff4c',
+				65536: '#00ff19',
+				131072: '#00ff00',
 			},
 			sunset: {
 				2: '#ff9ff3',
@@ -65,6 +88,12 @@ const ColoredTile: React.FC<ColoredTileProps> = ({
 				512: '#ff6b6b',
 				1024: '#ee5a24',
 				2048: '#ff9f43',
+				4096: '#ffb347',
+				8192: '#ff7f50',
+				16384: '#ff6347',
+				32768: '#ff4500',
+				65536: '#ff0000',
+				131072: '#b22222',
 			},
 			forest: {
 				2: '#8fbc8f',
@@ -78,6 +107,12 @@ const ColoredTile: React.FC<ColoredTileProps> = ({
 				512: '#4a7c59',
 				1024: '#2d5016',
 				2048: '#8fbc8f',
+				4096: '#228B22',
+				8192: '#006400',
+				16384: '#013220',
+				32768: '#355E3B',
+				65536: '#4F7942',
+				131072: '#556B2F',
 			},
 			gif: {
 				2: '#eee4da',
@@ -91,12 +126,15 @@ const ColoredTile: React.FC<ColoredTileProps> = ({
 				512: '#edc850',
 				1024: '#edc53f',
 				2048: '#edc22e',
+				4096: '#bdbdbd',
+				8192: '#bdbdbd',
+				16384: '#bdbdbd',
+				32768: '#bdbdbd',
+				65536: '#bdbdbd',
+				131072: '#bdbdbd',
 			},
 		};
-
 		const colors = themeColors[theme] || themeColors.gif;
-
-		// Type assertion since we know the valid values, or use bracket notation with fallback
 		return colors[value as TileValue] || '#3c3a32';
 	};
 

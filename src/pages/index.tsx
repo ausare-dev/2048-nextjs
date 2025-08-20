@@ -11,6 +11,8 @@ export default function Home() {
 	const [score, setScore] = useState(0);
 	const [bestScore, setBestScore] = useState(0);
 	const { currentTheme, changeTheme } = useTheme();
+	const [lockedBase, setLockedBase] = useState(false);
+	const [maxTile, setMaxTile] = useState(0);
 	const themeStyles = useThemeStyles(currentTheme);
 
 	useEffect(() => {
@@ -66,20 +68,44 @@ export default function Home() {
 		}
 	}, [themeStyles]);
 
+	// Слушаем событие автосмены темы (через localStorage) и вызываем changeTheme
+	useEffect(() => {
+		const handler = () => {
+			const theme = localStorage.getItem('gameTheme');
+			if (theme && theme !== currentTheme) {
+				changeTheme(theme);
+			}
+			setLockedBase(theme !== 'gif');
+		};
+		window.addEventListener('storage', handler);
+		return () => window.removeEventListener('storage', handler);
+	}, [currentTheme, changeTheme]);
+
 	const handleNewGame = () => {
 		setScore(0);
-		// Перезагружаем страницу для новой игры
+		setLockedBase(false);
 		window.location.reload();
 	};
 
 	const handleScoreUpdate = useCallback(
-		(newScore: number) => {
+		(newScore: number, board?: any[][]) => {
 			setScore(newScore);
 			if (newScore > bestScore) {
 				setBestScore(newScore);
 				if (typeof window !== 'undefined') {
 					localStorage.setItem('bestScore', newScore.toString());
 				}
+			}
+			// вычисляем максимальную плитку
+			if (board) {
+				let max = 0;
+				for (let row of board) {
+					for (let cell of row) {
+						if (cell.value && cell.value > max) max = cell.value;
+					}
+				}
+				setMaxTile(max);
+				if (max >= 2048) setLockedBase(true);
 			}
 		},
 		[bestScore]
@@ -96,7 +122,7 @@ export default function Home() {
 			<main>
 				<Board
 					isClient={isClient}
-					onScoreUpdate={handleScoreUpdate}
+					onScoreUpdate={(score, board) => handleScoreUpdate(score, board)}
 					currentTheme={currentTheme}
 				/>
 				<RightPanel
@@ -108,6 +134,7 @@ export default function Home() {
 				<ThemeSelector
 					currentTheme={currentTheme}
 					onThemeChange={changeTheme}
+					lockedBase={lockedBase}
 				/>
 			</main>
 		</>
