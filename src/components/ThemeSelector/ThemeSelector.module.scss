@@ -55,17 +55,68 @@
 }
 
 @media (max-width: 768px) {
-	.themeSelector {
-		position: fixed;
-		top: 10px;
-		left: 10px;
-		padding: 15px;
-		gap: 10px;
-	}
+  .themeSelector {
+	margin: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    top: 0;
+	border: 0;
+    padding: 15px 0 15px 0;
+    background: rgba(40, 40, 40, 0.85);
+    border-radius: 0 0 16px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 1002;
+    gap: 0;
+  }
 
-	.themeButton {
-		padding: 8px 12px;
-		font-size: 12px;
-		min-width: 100px;
-	}
+  .themes {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    padding: 0 10px;
+    scrollbar-width: none;
+	justify-content: space-around;
+  }
+  .themes::-webkit-scrollbar {
+    display: none;
+  }
+
+  .themeButton {
+    min-width: 48px;
+    min-height: 48px;
+    max-width: 48px;
+    max-height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2.5px solid #fff3;
+    background: #222;
+    box-shadow: 0 2px 8px #0004;
+    margin: 0;
+    transition: border 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .themeButton.active {
+    border: 3px solid #fff;
+    box-shadow: 0 4px 16px #0007;
+    transform: scale(1.12);
+  }
+  .themeButton:after {
+    content: attr(data-name);
+    display: block;
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    color: #fff;
+    opacity: 0.7;
+    pointer-events: none;
+  }
 }
