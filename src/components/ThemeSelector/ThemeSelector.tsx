@@ -22,13 +22,11 @@ const ThemeSelector: React.FC<ThemeSelectorProps> = ({
 						key={theme.id}
 						className={`${styles.themeButton} ${
 							currentTheme === theme.id ? styles.active : ''
-						}`}
+						} ${lockedBase && theme.id === 'gif' ? styles.disabled : ''}`}
 						onClick={() => onThemeChange(theme.id)}
 						style={{
 							background: theme.colors.scoreCounter,
 							borderColor: theme.colors.scoreCounterBorder,
-							opacity: lockedBase && theme.id === 'gif' ? 0.5 : 1,
-							pointerEvents: lockedBase && theme.id === 'gif' ? 'none' : 'auto',
 						}}
 						disabled={lockedBase && theme.id === 'gif'}
 					>
